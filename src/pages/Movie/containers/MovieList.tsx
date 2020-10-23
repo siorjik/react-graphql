@@ -20,7 +20,14 @@ const MovieList = () => {
     },
   });
 
-  const [deleteMovie] = useMutation(DELETE_MOVIE);
+  const [deleteMovie] = useMutation(DELETE_MOVIE, {
+    update: (cache, { data: { deleteMovie } }) => {
+      cache.writeQuery({
+        query: GET_MOVIE_LIST,
+        data: { movies: data.movies.filter((el: movieType) => +el.id !== +deleteMovie.id) }
+      });
+    },
+  });
 
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
@@ -42,12 +49,6 @@ const MovieList = () => {
   const remove = (id: string) => {
     deleteMovie({
       variables: { id },
-      update: (cache, { data }) => {
-        cache.writeQuery({
-          query: GET_MOVIE_LIST,
-          data: { movies: data.movies.filter((el: movieType) => +el.id !== +id) }
-        });
-      },
     });
   };
 
