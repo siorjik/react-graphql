@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export default gql`
-  query movieList {
-    movies {
+  mutation deleteMovie($id: ID!) {
+    deleteMovie(id: $id) {
       id
       name
       genre

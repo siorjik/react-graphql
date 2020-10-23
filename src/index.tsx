@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import 'antd/dist/antd.css';
 
-import './index.css';
+//import './index.css';
 //import App from './App';
+import './assets/styles/index.scss';
 import * as serviceWorker from './serviceWorker';
 import Router from './components/Router';
 
@@ -14,11 +15,9 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Router />
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <Router />
+  </ApolloProvider>,
   document.getElementById('root')
 );
 

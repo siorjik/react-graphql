@@ -2,23 +2,37 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { useQuery } from '@apollo/client';
 import { RouteComponentProps } from 'react-router-dom';
+import { Card, Breadcrumb } from 'antd';
+import { NavLink } from 'react-router-dom';
 
-import getMovie from '../../../graphql/moovie/getMovie';
+import GET_MOVIE from '../../../graphql/moovie/getMovie';
 
-interface MatchParams {
+type matchParams = {
   id: string;
 }
 
-const Info = (props: RouteComponentProps<MatchParams>) => {
+const Info = (props: RouteComponentProps<matchParams>) => {
   const { match: { params } } = props;
-  const { data: movieData } = useQuery(getMovie, {
+  const { data } = useQuery(GET_MOVIE, {
     variables: { id: params.id },
   });
 
+  const movie = data && data.movie;
+
   return (
     <>
-      <div>
-        <p>{movieData && movieData.movie.name} / {movieData && movieData.movie.genre}</p>
+      <div className="container">
+        <Breadcrumb>
+          <Breadcrumb.Item><NavLink to="/">List</NavLink></Breadcrumb.Item>
+          <Breadcrumb.Item>Info</Breadcrumb.Item>
+        </Breadcrumb>
+
+
+        {movie && <Card title="Movie info:">
+          <p>Name: {movie.name}</p>
+          <p>Genre: {movie.genre}</p>
+          <p>Director: {movie.director.name}</p>
+        </Card>}
       </div>
     </>
   );
