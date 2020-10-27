@@ -7,7 +7,9 @@ export default gql`
       name
       genre
       director {
+        id
         name
+        age
       }
     }
   }
