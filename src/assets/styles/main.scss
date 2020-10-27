@@ -2,6 +2,13 @@
     padding: 20px 24px;
 }
 
+.middle {
+  display: flex;
+  height: calc(100vh - 40px);
+  justify-content: center;
+  align-items: center;
+}
+
 // flex
 .flex {
   display: flex;
