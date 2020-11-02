@@ -26,6 +26,12 @@
   }
 }
 
+@for $i from 1 through 300 {
+  .m-#{$i}-b {
+    margin-bottom: $i + px;
+  }
+}
+
 // antd reset styles
 .icon.anticon {
   font-size: 20px;
